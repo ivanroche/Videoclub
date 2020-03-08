@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symphony\Component\Httpfoundation\HttpResponse;
+use Response;
+
 
 use App\Video;
 use App\Comment;
@@ -70,5 +72,33 @@ class VideoController extends Controller
 
   }
 
-    //
+    //Mètodes per mostrar imatges
+
+    public function getImage($filename) {
+        $file= \Storage::disk('images') ->  get($filename);
+        return new Response($file,200);
+    }
+
+    public function displayImage($filename)
+
+    {
+
+
+
+
+  $file= \Storage::disk('images') ->  get($filename);
+
+
+
+        $response = Response::make($file, 200);
+
+
+        return $response;
+
+    }
+
+
+
+
+
 }

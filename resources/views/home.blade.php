@@ -3,21 +3,38 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Pujar Video</div>
+        <div class="container">
+            @if (session('message'))
+              <div class="alert alert-success">
+                  {{session('message')}}
+              </div>
+            @endif
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+            <ul id="videos-list">
+
+              @foreach ($videos as $video)
+                <li class="video-item  col-md-4 pull-left">
+                    <!--imatge del video-
+                    <img src ="{{url('/miniatura/1583657498ivan.jpg')}}"  style="width: 30%; height: 30%;"/>
+                   <img src="/storage/public/1583657498ivan.jpg" style="width: 100%; height: 100%;"/> -->
+
+
+                   @if(Storage::disk('images')->has ($video->image))
+                    <img src ="{{url('/miniatura/'.$video->image)}}"  style="width: 30%; height: 30%;"/>
                     @endif
 
-                    Pàgina per posar formulari
-                </div>
-            </div>
+                    <div class="data">
+                    <h4>{{$video->title}}</h4>
+                  </div>
+                    <!--botons d'acció-->
+
+                </li>
+                @endforeach
+              </ul>
         </div>
+
+        {{$videos->links()}}
+
     </div>
 </div>
 @endsection

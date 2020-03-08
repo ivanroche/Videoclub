@@ -63,3 +63,8 @@ Route::post('/guardar-video', array (
   'uses' =>'VideoController@saveVideo'
 
 ));
+
+Route::get('/miniatura/{filename}', array(
+    'as' => 'imageVideo',
+    'uses'=>'VideoController@displayImage'
+));
